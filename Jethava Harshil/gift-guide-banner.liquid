@@ -1,0 +1,347 @@
+{% comment %}
+  ============================================================
+  Section: Gift Guide Banner
+  Description: Hero banner section for the Gift Guide page
+  Author: Tisso Vison
+  ============================================================
+{% endcomment %}
+
+<section class="gift-guide-banner" id="gift-guide-banner">
+
+  {%- comment -%} ---- TOP NAVIGATION BAR ---- {%- endcomment -%}
+  <div class="ggb__navbar">
+    <div class="ggb__navbar-logo">
+      {{ section.settings.logo_text }}
+    </div>
+    <div class="ggb__navbar-tagline">
+      {{ section.settings.navbar_tagline }}
+    </div>
+    <a href="{{ section.settings.choose_gift_url }}" class="ggb__btn ggb__btn--yellow ggb__btn--animated">
+      {{ section.settings.choose_gift_label }}
+      <span class="ggb__btn-arrow">→</span>
+    </a>
+  </div>
+
+  {%- comment -%} ---- HERO CONTENT AREA ---- {%- endcomment -%}
+  <div class="ggb__hero">
+
+    {%- comment -%} Background SVG illustration - line art objects {%- endcomment -%}
+    <div class="ggb__illustration-bg" aria-hidden="true">
+      {% render 'gift-guide-illustration' %}
+    </div>
+
+    {%- comment -%} Text content on the left {%- endcomment -%}
+    <div class="ggb__hero-content">
+      <h1 class="ggb__heading">
+        {{ section.settings.hero_heading }}
+      </h1>
+      <p class="ggb__description">
+        {{ section.settings.hero_description }}
+      </p>
+      <a href="{{ section.settings.shop_now_url }}" class="ggb__btn ggb__btn--dark ggb__btn--animated">
+        {{ section.settings.shop_now_label }}
+        <span class="ggb__btn-arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+
+  {%- comment -%} ---- BOTTOM TICKER / MARQUEE STRIP ---- {%- endcomment -%}
+  <div class="ggb__ticker">
+    <div class="ggb__ticker-track">
+      {% for i in (1..6) %}
+        <span class="ggb__ticker-text">{{ section.settings.ticker_text }}</span>
+        <span class="ggb__ticker-dot">•</span>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
+
+{% stylesheet %}
+/* ============================================================
+   GIFT GUIDE BANNER — STYLES
+   ============================================================ */
+
+.gift-guide-banner {
+  width: 100%;
+  background: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ---- NAVBAR ---- */
+.ggb__navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.ggb__navbar-logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.ggb__navbar-tagline {
+  font-size: 14px;
+  color: #555;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---- BUTTONS ---- */
+.ggb__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ggb__btn--yellow {
+  background: #f5e642;
+  color: #111;
+}
+
+.ggb__btn--dark {
+  background: #111;
+  color: #fff;
+}
+
+/* Button animation on hover */
+.ggb__btn--animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.ggb__btn--animated::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.ggb__btn--animated:hover::after {
+  transform: translateX(0);
+}
+
+.ggb__btn--animated:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.ggb__btn-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.ggb__btn--animated:hover .ggb__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ---- HERO AREA ---- */
+.ggb__hero {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 40px 60px;
+  overflow: hidden;
+}
+
+.ggb__illustration-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.ggb__illustration-bg svg {
+  height: 100%;
+  width: auto;
+  max-width: 70%;
+}
+
+.ggb__hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+}
+
+.ggb__heading {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: #111;
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.ggb__description {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+/* ---- TICKER / MARQUEE ---- */
+.ggb__ticker {
+  background: #f0f0f0;
+  padding: 10px 0;
+  overflow: hidden;
+  border-top: 1px solid #e0e0e0;
+}
+
+.ggb__ticker-track {
+  display: flex;
+  gap: 24px;
+  white-space: nowrap;
+  animation: ticker-scroll 18s linear infinite;
+  width: max-content;
+}
+
+.ggb__ticker-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.ggb__ticker-dot {
+  color: #999;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- MOBILE RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .ggb__navbar {
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ggb__navbar-tagline {
+    display: none;
+  }
+
+  .ggb__hero {
+    min-height: 360px;
+    padding: 0 20px 40px;
+    align-items: flex-end;
+  }
+
+  .ggb__heading {
+    font-size: 36px;
+  }
+
+  .ggb__illustration-bg svg {
+    max-width: 100%;
+    opacity: 0.3;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Gift Guide Banner",
+  "tag": "section",
+  "class": "gift-guide-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navbar Settings"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "text",
+      "id": "navbar_tagline",
+      "label": "Navbar Tagline",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "choose_gift_label",
+      "label": "Choose Gift Button Label",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "choose_gift_url",
+      "label": "Choose Gift Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Main Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+    },
+    {
+      "type": "text",
+      "id": "shop_now_label",
+      "label": "Shop Now Button Label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "shop_now_url",
+      "label": "Shop Now Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Ticker Strip"
+    },
+    {
+      "type": "text",
+      "id": "ticker_text",
+      "label": "Ticker Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guide Banner"
+    }
+  ]
+}
+{% endschema %}
